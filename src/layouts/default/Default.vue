@@ -1,9 +1,3 @@
-<template>
-  <v-app>
-    <default-view />
-  </v-app>
-</template>
+<template>DefaultView</template>
 
-<script setup>
-import DefaultView from "./View.vue";
-</script>
+<script setup></script>

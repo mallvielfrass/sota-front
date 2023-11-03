@@ -2,8 +2,27 @@
   <v-app>
     <Bar @setloginstate="setloginstate" />
     <div class="padding-top"></div>
-    <div v-if="isLogin">
-      <router-view />
+
+    <div v-if="isLogin" class="working-container">
+      <div class="pagination">
+        <div class="page-link" role="link" @click="navigate('/my')">
+          Моя страница
+        </div>
+        <div class="page-link" role="link" @click="navigate('/messages')">
+          Мои сообщения
+        </div>
+        <div class="page-link" role="link" @click="navigate('/chats')">
+          Мои чаты
+        </div>
+        <div class="page-link" role="link" @click="navigate('/bots')">
+          Мои боты
+        </div>
+      </div>
+      <div class="working">
+        <v-main>
+          <router-view />
+        </v-main>
+      </div>
     </div>
   </v-app>
 </template>
@@ -17,6 +36,9 @@ export default {
   }),
   components: { Bar },
   methods: {
+    navigate(path) {
+      this.$router.push(path);
+    },
     setloginstate(state) {
       console.log("setloginstate", state);
       this.isLogin = state;
@@ -25,6 +47,36 @@ export default {
 };
 </script>
 <style>
+[role="link"]:hover {
+  cursor: pointer;
+  background-color: rgb(169, 185, 253);
+}
+
+.working-container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  height: 80%;
+}
+.page-link {
+  border: 1px solid rgb(75, 75, 75);
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+}
+.pagination {
+  background-color: white;
+  border: 2px solid rgb(44, 20, 100);
+}
+
+.working {
+  background-color: lightgray;
+}
+
 .padding-top {
   padding-top: 80px;
 }

@@ -107,3 +107,41 @@ export const loginUser = async (mail, password) => {
 export const getToken = () => {
   return localStorage.getItem("token");
 };
+export const checkAuth = async () => {
+  const authResp = {
+    isLogin: false,
+    errors: [],
+  };
+  const token = getToken();
+  if (!token) {
+    authResp.errors.push("No token found");
+    return authResp;
+  }
+  await fetch("/api/auth/check", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .catch((error) => {
+      authResp.errors.push("Unknown error");
+      console.log("unknown error", error);
+    })
+    .then(async (response) => {
+      if (response.status != 200 && response.status != 201) {
+        authResp.errors.push("Unknown error");
+        console.log("unknown error", response.status);
+        return;
+      }
+
+      const body = await response.json();
+      if (body.status !== "success") {
+        authResp.errors.push("Unknown error");
+        console.log("unknown error", body, response.status);
+        return;
+      }
+
+      authResp.isLogin = true;
+    });
+  return authResp;
+};

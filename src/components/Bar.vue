@@ -50,11 +50,11 @@
   </v-app-bar>
 </template>
 <script>
+import { checkAuth, loginUser, registerUser } from "@/api/auth.js";
 import LoginForm from "@/components/LoginForm.vue";
-import RegisterForm from "@/components/RegisterForm.vue";
-import NotifyAlert from "@/components/NotifyAlert.vue";
-import { registerUser, loginUser } from "@/api/auth.js";
 import MenuList from "@/components/MenuList.vue";
+import NotifyAlert from "@/components/NotifyAlert.vue";
+import RegisterForm from "@/components/RegisterForm.vue";
 export default {
   data() {
     return {
@@ -148,39 +148,13 @@ export default {
       this.mode = this.mode === "login" ? "register" : "login";
     },
     checkLoginFromLocalStorage: async function () {
-      const token = localStorage.getItem("token");
-      //const dateExpiration = localStorage.getItem("expiration");
-      //const logTime= localStorage.getItem("logtime");
-      if (token) {
-        this.isLogin = false;
-        fetch("/api/auth/user/ping", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${token}`,
-          },
-        })
-          .then(async (responseStream) => {
-            const response = await responseStream.json();
-            if (responseStream.status === 200 && response.message === "pong") {
-              this.isLogin = true;
-              this.$emit("setloginstate", this.isLogin);
-              return console.log("login success:", this.isLogin);
-            }
-            localStorage.removeItem("token");
-            return console.log("login fail:", this.isLogin, response);
-          })
-          .catch((error) => {
-            console.log("login fail:", this.isLogin, error);
-            this.isLogin = false;
-            this.$emit("setloginstate", this.isLogin);
-            localStorage.removeItem("token");
-          });
-      } else {
-        console.log("not login");
-        this.isLogin = false;
-        this.$emit("setloginstate", this.isLogin);
+      const authResp = await checkAuth();
+      //  console.log("authResp", authResp);
+      if (authResp.errors.length != 0) {
+        localStorage.removeItem("token");
       }
+      this.isLogin = authResp.isLogin;
+      this.$emit("setloginstate", authResp.isLogin);
     },
   },
 };

@@ -2,21 +2,21 @@ export const registerUser = async (username, mail, password) => {
   const errors = [];
   let isLogin = false;
   console.log("register");
-  await fetch("/api/nauth/register", {
+  await fetch("/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      mail: mail,
+      email: mail,
       name: username,
       password: password,
     }),
   })
     .then(async (response) => {
       const body = await response.json();
-      if (response.status == 400) {
-        switch (body.error) {
+      if (response.status == 400 || response.status == 401) {
+        switch (body.message) {
           case "user already exist": {
             errors.push("User already exist");
             break;
@@ -32,7 +32,7 @@ export const registerUser = async (username, mail, password) => {
         }
         return;
       }
-      if (!response.status == 200) {
+      if (!response.status == 200 && !response.status == 201) {
         errors.push("Unknown error");
         console.log("unknown error", body, response.status);
         return;
@@ -43,8 +43,8 @@ export const registerUser = async (username, mail, password) => {
         return;
       }
 
-      const session = body.session;
-      localStorage.setItem("token", session.id);
+      const jwtToken = body.token;
+      localStorage.setItem("token", jwtToken);
       isLogin = true;
     })
 
@@ -59,19 +59,19 @@ export const loginUser = async (mail, password) => {
   let isLogin = false;
 
   console.log("login");
-  await fetch("/api/nauth/login", {
+  await fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      mail: mail,
+      email: mail,
       password: password,
     }),
   }).then(async (response) => {
     const body = await response.json();
     if (response.status == 400) {
-      switch (body.error) {
+      switch (body.message) {
         case "no body": {
           errors.push("Empty field for mail or password");
           break;
@@ -88,7 +88,7 @@ export const loginUser = async (mail, password) => {
       }
       return;
     }
-    if (!response.status == 200) {
+    if (!response.status == 200 && !response.status == 201) {
       errors.push("Unknown error");
       console.log("unknown error", body, response.status);
       return;
@@ -98,8 +98,8 @@ export const loginUser = async (mail, password) => {
       console.log("unknown login error", body, response.status);
       return;
     }
-    const session = body.session;
-    localStorage.setItem("token", session.id);
+    const jwtToken = body.token;
+    localStorage.setItem("token", jwtToken);
     isLogin = true;
   });
   return { isLogin, errors };

@@ -50,7 +50,6 @@
   </v-dialog>
 </template>
 <script>
-import { getBots, getChats } from "@/api/bots.js";
 import { updateChat } from "@/api/chats.js";
 export default {
   props: {

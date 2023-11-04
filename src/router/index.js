@@ -45,7 +45,9 @@ const Home = { template: "<div>Home</div>" };
 const routes = [
   { path: "/bots", component: () => import("@/views/Bots.vue") },
   { path: "/my", component: import("@/views/Account.vue") },
-  { path: "/messages", component: import("@/views/Messages.vue") },
+  { path: "/messages", component: import("@/views/Chats.vue") },
+  //chats
+  { path: "/chats/:id", component: () => import("@/views/Chat.vue") },
   { path: "/", component: Home },
 
   { path: "/:pathMatch(.*)*", component: () => import("@/views/NotFound.vue") },

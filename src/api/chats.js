@@ -64,3 +64,28 @@ export const updateChat = async (id, updatedObj) => {
   resp.chat = chat;
   return resp;
 };
+export const apiGetChats = async () => {
+  const chats = [];
+  const token = getToken();
+  await fetch("/api/dialog", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(async (response) => {
+    const body = await response.json();
+    if (response.status != 200) {
+      return;
+    }
+    if (!body.dialogs) {
+      return;
+    }
+    if (body.dialogs.length == 0) {
+      return;
+    }
+
+    chats.push(...body.dialogs);
+  });
+  return chats;
+};

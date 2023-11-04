@@ -8,7 +8,7 @@
           color="green"
           @click="dialog = true"
         >
-          Create New Chat</v-btn
+          Create New Dialog</v-btn
         >
       </v-col>
     </v-row>
@@ -76,7 +76,7 @@
   </v-dialog>
 </template>
 <script>
-import { getBots, getChats } from "@/api/bots.js";
+import { getBots } from "@/api/bots.js";
 import { createChat } from "@/api/chats.js";
 export default {
   data() {

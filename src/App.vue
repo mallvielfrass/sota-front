@@ -11,18 +11,15 @@
         <div class="page-link" role="link" @click="navigate('/messages')">
           Мои сообщения
         </div>
-        <div class="page-link" role="link" @click="navigate('/chats')">
-          Мои чаты
-        </div>
+
         <div class="page-link" role="link" @click="navigate('/bots')">
           Мои боты
         </div>
       </div>
       <div class="working">
-        <v-main>
-          <router-view />
-        </v-main>
+        <router-view />
       </div>
+      <div class="right"></div>
     </div>
   </v-app>
 </template>
@@ -54,8 +51,9 @@ export default {
 
 .working-container {
   display: grid;
-  grid-template-columns: 20% 80%;
-  height: 80%;
+  grid-template-columns: 20% 60% 20%;
+
+  height: 90%;
 }
 .page-link {
   border: 1px solid rgb(75, 75, 75);

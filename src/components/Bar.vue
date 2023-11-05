@@ -1,7 +1,7 @@
 <template>
   <v-app-bar color="#6A76AB" dark shrink-on-scroll prominent class="my-app-bar">
     <v-container v-if="isLogin">
-      <MenuList />
+      <!-- <MenuList /> -->
     </v-container>
 
     <div v-if="isLogin" class="ml-auto padding-right">

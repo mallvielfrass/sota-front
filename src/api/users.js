@@ -56,3 +56,35 @@ export const apiGetUser = async (id) => {
     error: error,
   };
 };
+
+export const apiGetMe = async () => {
+  let user = {};
+  let error = null;
+  const token = getToken();
+  await fetch(`/api/auth/check`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(async (response) => {
+    const body = await response.json();
+    if (response.status != 200) {
+      error = body.error;
+
+      return;
+    }
+    if (!body.token?.userId) {
+      error = "Unknown error";
+      return;
+    }
+    user = {
+      userId: body.token.userId,
+    };
+  });
+  // console.log("user", user);
+  return {
+    user: user,
+    error: error,
+  };
+};

@@ -7,7 +7,7 @@
         :src="avatar"
         class="nestedBox center"
       ></v-img>
-      <WriteMessageButton v-if="!user.isMe" :userId="userId" />
+      <WriteMessageButton v-if="!user.isMe && isLoaded" :userId="userId" />
     </div>
 
     <div class="nestedBox pa-3">

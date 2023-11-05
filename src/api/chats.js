@@ -89,3 +89,32 @@ export const apiGetChats = async () => {
   });
   return chats;
 };
+export const apiGetOrCreatePrivateDialog = async (userId) => {
+  const token = getToken();
+  // POST /api/dialog/private/${userId}
+  let dialogId = "";
+  let error = null;
+  await fetch(`/api/dialog/private/${userId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(async (response) => {
+    if (response.status != 200 && response.status != 201) {
+      error = await response.json();
+      return;
+    }
+    const res = await response.json();
+    if (!res.dialog._id) {
+      error = "Unknown error";
+      return;
+    }
+    console.log("dialog:", res.dialog);
+    dialogId = res.dialog._id;
+  });
+  return {
+    dialogId: dialogId,
+    error: error,
+  };
+};

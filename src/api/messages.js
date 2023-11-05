@@ -35,3 +35,31 @@ export const apiSendMessage = async (chatId, message) => {
   });
   return resp;
 };
+export const apiGetMessages = async (chatId, limit, offset) => {
+  const token = getToken();
+  let resp = {
+    messages: null,
+    error: null,
+  };
+  await fetch(`/api/message/${chatId}?limit=${limit}&offset=${offset}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(async (response) => {
+    if (response.status != 200 && response.status != 201) {
+      resp.error = await response.json();
+      return;
+    }
+    const res = await response.json();
+    const messages = res.messages;
+    if (!messages) {
+      console.log("err res:", res);
+      resp.error = "messages not found";
+      return;
+    }
+    resp.messages = messages;
+  });
+  return resp;
+};

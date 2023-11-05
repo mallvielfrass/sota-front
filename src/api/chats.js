@@ -118,3 +118,30 @@ export const apiGetOrCreatePrivateDialog = async (userId) => {
     error: error,
   };
 };
+export const apiGetChat = async (id) => {
+  let chat = {};
+  let error = null;
+  const token = getToken();
+  await fetch(`/api/dialog/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(async (response) => {
+    const body = await response.json();
+    if (response.status != 200) {
+      error = body.error;
+      return;
+    }
+    if (!body.dialog) {
+      error = "Unknown error";
+      return;
+    }
+    chat = body.dialog;
+  });
+  return {
+    chat: chat,
+    error: error,
+  };
+};

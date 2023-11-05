@@ -28,3 +28,31 @@ export const apiGetUsers = async (limit, offset) => {
   });
   return users;
 };
+export const apiGetUser = async (id) => {
+  let user = {};
+  let error = null;
+  const token = getToken();
+  await fetch(`/api/user/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(async (response) => {
+    const body = await response.json();
+    if (response.status != 200) {
+      error = body.error;
+
+      return;
+    }
+    if (!body.user) {
+      error = "Unknown error";
+      return;
+    }
+    user = body.user;
+  });
+  return {
+    user: user,
+    error: error,
+  };
+};

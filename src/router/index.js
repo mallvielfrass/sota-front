@@ -50,6 +50,7 @@ const routes = [
   { path: "/chats/:id", component: () => import("@/views/Chat.vue") },
   //users
   { path: "/users", component: () => import("@/views/Users.vue") },
+  { path: "/users/:id", component: () => import("@/views/User.vue") },
   { path: "/", component: () => import("@/views/Account.vue") },
 
   { path: "/:pathMatch(.*)*", component: () => import("@/views/NotFound.vue") },

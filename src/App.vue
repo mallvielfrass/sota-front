@@ -15,6 +15,10 @@
         <div class="page-link" role="link" @click="navigate('/bots')">
           Мои боты
         </div>
+
+        <div class="page-link" role="link" @click="navigate('/users')">
+          Люди
+        </div>
       </div>
       <div class="working">
         <router-view />

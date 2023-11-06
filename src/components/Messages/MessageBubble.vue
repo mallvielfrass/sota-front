@@ -100,7 +100,6 @@ export default {
 .bubble-message-position-left {
   background-color: rgb(255, 255, 255);
   border-radius: 10% 10% 10% 0%;
-  padding: 1em;
 }
 .bubble-data {
   font: 0.7em sans-serif;

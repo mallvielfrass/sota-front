@@ -5,11 +5,13 @@
       <div class="msgCount">всего сообщений: {{ chat.msgCount }}</div>
     </div>
     <div class="bubbles">
-      <MessageBubble
-        :message="message"
-        v-for="message in messages"
-        :key="message.dialogId"
-      />
+      <div class="bubbles-list">
+        <MessageBubble
+          :message="message"
+          v-for="message in messages"
+          :key="message.dialogId"
+        />
+      </div>
     </div>
     <div class="inputBox">
       <v-textarea
@@ -93,11 +95,17 @@ export default {
   font: 0.7em sans-serif;
 }
 .bubbles {
+  display: flex;
+  height: 100%;
+  overflow-y: auto;
 }
-
+.bubbles-list {
+  display: grid;
+  grid-template-columns: auto;
+}
 .messagesBox {
   display: grid;
-  grid-template-rows: auto 10rem 1fr; /* первая строка займет место по содержимому, вторая - 10rem, третья - остальное пространство */
+  grid-template-rows: auto auto 1fr; /* первая строка займет место по содержимому, вторая - 10rem, третья - остальное пространство */
   height: 90vh; /* чтобы контейнер занимал всю высоту видимой области */
 }
 

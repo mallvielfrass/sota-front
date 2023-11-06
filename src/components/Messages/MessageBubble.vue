@@ -80,7 +80,7 @@ export default {
 }
 .bubble-message {
   border: 1px solid rgb(75, 75, 75);
-  padding: 1em;
+
   min-height: 1.5em;
   max-height: max-content;
 
@@ -94,18 +94,14 @@ export default {
 }
 .bubble-message-position-right {
   background-color: rgb(210, 226, 240);
-  border-radius: 30% 30% 0% 30%;
-  padding: 1em;
 }
 .bubble-message-position-left {
-  background-color: rgb(255, 255, 255);
-  border-radius: 10% 10% 10% 0%;
 }
 .bubble-data {
   font: 0.7em sans-serif;
   display: grid;
   /* justify-items: end; */
-  padding-top: 1em;
+  padding-top: 0.2em;
   /* grid-template-columns: 20% 20%; */
 }
 .bubble-service-left {

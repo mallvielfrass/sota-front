@@ -6,12 +6,13 @@
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 
-// Components
 import App from "./App.vue";
+// Components
 import { createApp } from "vue";
 // Plugins
 import { registerPlugins } from "@/plugins";
-
+import { socketIo } from "./socketio/socket";
+socketIo.connect();
 const app = createApp(App);
 
 registerPlugins(app);

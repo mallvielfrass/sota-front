@@ -97,7 +97,7 @@ export default {
       }
       const { firstName, lastName, email, password } =
         this.$refs.registerFormRef.getData();
-      console.log(username, email, password);
+      console.log(firstName, lastName, email, password);
       const response = await registerUser(firstName, lastName, email, password);
       console.log(response);
       if (response.errors.length != 0) {

@@ -1,4 +1,4 @@
-export const registerUser = async (username, mail, password) => {
+export const registerUser = async (firstName, lastName, mail, password) => {
   const errors = [];
   let isLogin = false;
   console.log("register");
@@ -9,7 +9,8 @@ export const registerUser = async (username, mail, password) => {
     },
     body: JSON.stringify({
       email: mail,
-      name: username,
+      firstName: firstName,
+      lastName: lastName,
       password: password,
     }),
   })

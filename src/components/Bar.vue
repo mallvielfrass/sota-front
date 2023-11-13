@@ -95,10 +95,10 @@ export default {
           "Please fill in all fields correctly"
         );
       }
-      const { username, email, password } =
+      const { firstName, lastName, email, password } =
         this.$refs.registerFormRef.getData();
       console.log(username, email, password);
-      const response = await registerUser(username, email, password);
+      const response = await registerUser(firstName, lastName, email, password);
       console.log(response);
       if (response.errors.length != 0) {
         response.errors.map((error) => {

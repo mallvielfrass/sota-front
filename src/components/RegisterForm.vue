@@ -12,12 +12,32 @@
           </ul>
         </div>
       </v-row>
-      <v-row justify="center" align="center">
+      <!-- <v-row justify="center" align="center">
         <v-col cols="1" md="6">
           <v-text-field
             v-model="username"
             :rules="nameRules"
             label="Username"
+            required
+          ></v-text-field>
+        </v-col>
+      </v-row> -->
+      <v-row justify="center" align="center">
+        <v-col cols="1" md="6">
+          <v-text-field
+            v-model="firstName"
+            :rules="nameRules"
+            label="First Name"
+            required
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row justify="center" align="center">
+        <v-col cols="1" md="6">
+          <v-text-field
+            v-model="lastName"
+            :rules="nameRules"
+            label="Last Name"
             required
           ></v-text-field>
         </v-col>
@@ -64,6 +84,8 @@ export default {
 
     errors: [],
     username: "",
+    firstName: "",
+    lastName: "",
     nameRules: [
       (value) => {
         if (value) return true;
@@ -71,8 +93,8 @@ export default {
         return "Name is required.";
       },
       (value) => {
-        if (4 <= value?.length <= 10) return true;
-        return "Name must be greater then 4 and less than 10 characters.";
+        if (2 <= value?.length <= 15) return true;
+        return "Name must be greater then 2 and less than 15 characters.";
       },
     ],
     email: "",
@@ -125,7 +147,8 @@ export default {
     },
     getData() {
       return {
-        username: this.username,
+        firstName: this.firstName,
+        lastName: this.lastName,
         email: this.email,
         password: this.password,
       };

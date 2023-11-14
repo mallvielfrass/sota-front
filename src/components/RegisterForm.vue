@@ -13,7 +13,7 @@
         </div>
       </v-row>
       <!-- <v-row justify="center" align="center">
-        <v-col cols="1" md="6">
+        <v-col  md="6">
           <v-text-field
             v-model="username"
             :rules="nameRules"
@@ -23,7 +23,7 @@
         </v-col>
       </v-row> -->
       <v-row justify="center" align="center">
-        <v-col cols="1" md="6">
+        <v-col md="6">
           <v-text-field
             v-model="firstName"
             :rules="nameRules"
@@ -33,7 +33,7 @@
         </v-col>
       </v-row>
       <v-row justify="center" align="center">
-        <v-col cols="1" md="6">
+        <v-col md="6">
           <v-text-field
             v-model="lastName"
             :rules="nameRules"
@@ -43,7 +43,7 @@
         </v-col>
       </v-row>
       <v-row justify="center" align="center">
-        <v-col cols="1" md="6">
+        <v-col md="6">
           <v-text-field
             v-model="email"
             :rules="emailRules"
@@ -53,7 +53,7 @@
         </v-col>
       </v-row>
       <v-row justify="center" align="center">
-        <v-col ccols="1" md="6">
+        <v-col md="6">
           <v-text-field
             v-model="password"
             :rules="passRules"
@@ -64,7 +64,7 @@
         </v-col>
       </v-row>
       <v-row justify="center" align="center">
-        <v-col cols="1" md="6">
+        <v-col md="6">
           <v-text-field
             v-model="passwordRepeat"
             :rules="passRepeatRules"

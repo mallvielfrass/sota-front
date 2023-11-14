@@ -303,6 +303,9 @@ export default {
   },
   methods: {
     navigate(path) {
+      if (this.$isMobile) {
+        this.isOpened = false;
+      }
       this.$router.push(path);
     },
     tooltipAttached() {

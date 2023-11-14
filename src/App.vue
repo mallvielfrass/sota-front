@@ -2,7 +2,6 @@
   <v-app>
     <Bar @setloginstate="setloginstate" />
 
-    <div v-if="$isMobile()">Is mobile</div>
     <div
       v-if="isLogin"
       :class="{

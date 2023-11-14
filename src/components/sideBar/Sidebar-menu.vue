@@ -4,14 +4,13 @@
     :class="{
       sidebar: true,
       open: isOpened,
-      'sidebar-mobile': $isMobile(),
+      min: $isMobile(),
     }"
   >
     <div
       class="logo-details"
       :class="{
         'btn-list-on': !$isMobile(),
-        'btn-list-on-mobile': $isMobile(),
       }"
     >
       <img
@@ -49,7 +48,7 @@
         }"
       >
         <ul class="nav-list" style="overflow: visible">
-          <li id="links_search" v-if="isSearch" @click="isOpened = true">
+          <!-- <li id="links_search" v-if="isSearch" @click="isOpened = true">
             <i class="bx bx-search" />
             <input
               type="text"
@@ -59,28 +58,20 @@
             <span data-target="links_search" class="tooltip">{{
               searchTooltip
             }}</span>
-          </li>
+          </li> -->
 
           <li
             v-for="(menuItem, index) in menuItems"
             :key="index"
             :id="'links_' + index"
           >
-            <router-link v-if="isUsedVueRouter" :to="menuItem.link">
-              <i class="bx" :class="menuItem.icon || 'bx-square-rounded'" />
-              <span class="links_name">{{ menuItem.name }}</span>
-            </router-link>
-            <a
-              v-else
-              @click.stop.prevent="$emit('menuItemClcked', menuItem.link)"
-              :href="menuItem.link"
-            >
+            <a @click="navigate(menuItem.link)">
               <i class="bx" :class="menuItem.icon || 'bx-square-rounded'" />
               <span class="links_name">{{ menuItem.name }}</span>
             </a>
-            <span :data-target="'links_' + index" class="tooltip">{{
+            <!-- <span :data-target="'links_' + index" class="tooltip">{{
               menuItem.tooltip || menuItem.name
-            }}</span>
+            }}</span> -->
           </li>
         </ul>
       </div>
@@ -147,54 +138,54 @@ export default {
     menuItems: {
       type: Array,
       default: () => [
+        // {
+        //   link: "#",
+        //   name: "Dashboard",
+        //   tooltip: "Dashboard",
+        //   icon: "bx-grid-alt",
+        // },
         {
-          link: "#",
-          name: "Dashboard",
-          tooltip: "Dashboard",
-          icon: "bx-grid-alt",
-        },
-        {
-          link: "#",
-          name: "User",
-          tooltip: "User",
+          link: "/users",
+          name: "Люди",
+          tooltip: "",
           icon: "bx-user",
         },
         {
-          link: "#",
-          name: "Messages",
-          tooltip: "Messages",
+          link: "/messages",
+          name: "Мои сообщения",
+          tooltip: "",
           icon: "bx-chat",
         },
-        {
-          link: "#",
-          name: "Analytics",
-          tooltip: "Analytics",
-          icon: "bx-pie-chart-alt-2",
-        },
-        {
-          link: "#",
-          name: "File Manager",
-          tooltip: "Files",
-          icon: "bx-folder",
-        },
-        {
-          link: "#",
-          name: "Order",
-          tooltip: "Order",
-          icon: "bx-cart-alt",
-        },
-        {
-          link: "#",
-          name: "Saved",
-          tooltip: "Saved",
-          icon: "bx-heart",
-        },
-        {
-          link: "#",
-          name: "Setting",
-          tooltip: "Setting",
-          icon: "bx-cog",
-        },
+        // {
+        //   link: "#",
+        //   name: "Analytics",
+        //   tooltip: "Analytics",
+        //   icon: "bx-pie-chart-alt-2",
+        // },
+        // {
+        //   link: "#",
+        //   name: "File Manager",
+        //   tooltip: "Files",
+        //   icon: "bx-folder",
+        // },
+        // {
+        //   link: "#",
+        //   name: "Order",
+        //   tooltip: "Order",
+        //   icon: "bx-cart-alt",
+        // },
+        // {
+        //   link: "#",
+        //   name: "Saved",
+        //   tooltip: "Saved",
+        //   icon: "bx-heart",
+        // },
+        // {
+        //   link: "#",
+        //   name: "Setting",
+        //   tooltip: "Setting",
+        //   icon: "bx-cog",
+        // },
       ],
     },
 
@@ -311,6 +302,9 @@ export default {
     },
   },
   methods: {
+    navigate(path) {
+      this.$router.push(path);
+    },
     tooltipAttached() {
       const tooltips = document.querySelectorAll(".tooltip");
       tooltips.forEach((tooltip) => {

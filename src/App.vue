@@ -29,7 +29,8 @@
       <div class="working">
         <router-view />
       </div>
-      <div class="right"></div>
+
+      <div v-if="!$isMobile()" class="right"></div>
     </div>
   </v-app>
 </template>
@@ -64,13 +65,13 @@ export default {
   display: grid;
   grid-template-columns: minmax(auto, max-content) 60% minmax(20%, auto);
 
-  height: 90%;
+  height: 95%;
 }
 .working-container-mobile {
   display: grid;
   grid-template-columns: minmax(auto, max-content) minmax(60%, auto);
-
-  height: 90%;
+  height: max-content;
+  min-height: 95%;
 }
 .page-link {
   border: 1px solid rgb(75, 75, 75);

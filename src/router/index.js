@@ -1,6 +1,20 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
 
+import Account from "@/views/Account.vue";
+import Agent from "@/views/Agent.vue";
+//       {
+//         path: "/bots",
+//         name: "Bots",
+//         component: () => import("@/views/Bots.vue"),
+//       },
+import Bots from "@/views/Bots.vue";
+import Chat from "@/views/Chat.vue";
+import Chats from "@/views/Chats.vue";
+import NotFound from "@/views/NotFound.vue";
+import User from "@/views/User.vue";
+import Users from "@/views/Users.vue";
+import MobileAgent from "@/viewsMobile/Agent.vue";
 //       //any other routes
 //       {
 //         path: "/:pathMatch(.*)*",
@@ -38,32 +52,23 @@ const { isMobile } = useMobileDetection();
 //           import(/* webpackChunkName: "account" */ "@/views/Account.vue"),
 //       },
 
-//       {
-//         path: "/bots",
-//         name: "Bots",
-//         component: () => import("@/views/Bots.vue"),
-//       },
-
 const Home = { template: "<div>Home</div>" };
 const routes = [
-  { path: "/bots", component: () => import("@/views/Bots.vue") },
-  { path: "/my", component: () => import("@/views/Account.vue") },
-  { path: "/messages", component: () => import("@/views/Chats.vue") },
+  { path: "/bots", component: () => Bots },
+  { path: "/my", component: () => Account },
+  { path: "/messages", component: () => Chats },
   //chats
-  { path: "/chats/:id", component: () => import("@/views/Chat.vue") },
+  { path: "/chats/:id", component: () => Chat },
   //users
-  { path: "/users", component: () => import("@/views/Users.vue") },
-  { path: "/users/:id", component: () => import("@/views/User.vue") },
+  { path: "/users", component: () => Users },
+  { path: "/users/:id", component: () => User },
   {
     path: "/agent",
-    component: () =>
-      this.$isMobile()
-        ? import("@/viewsMobile/Agent.vue")
-        : import("@/views/Agent.vue"),
+    component: () => (this.$isMobile() ? MobileAgent : Agent),
   },
-  { path: "/", component: () => import("@/views/Account.vue") },
+  { path: "/", Account },
 
-  { path: "/:pathMatch(.*)*", component: () => import("@/views/NotFound.vue") },
+  { path: "/:pathMatch(.*)*", component: () => NotFound },
 ];
 
 // 3. Create the router instance and pass the `routes` option

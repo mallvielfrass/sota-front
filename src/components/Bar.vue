@@ -4,7 +4,7 @@
       <!-- <MenuList /> -->
     </v-container>
 
-    <div v-if="isLogin" class="ml-auto padding-righ button-padding">
+    <div v-if="isLogin" class="ml-auto padding-right button-padding">
       <v-btn variant="outlined" @click="logout"> Logout</v-btn>
     </div>
     <div v-else class="ml-auto padding-right button-padding">
@@ -166,7 +166,8 @@ export default {
 }
 .my-app-bar {
   position: relative;
-  background-color: rgb(106, 118, 171);
+  /* background-color: rgb(106, 118, 171); */
+  background-color: #11101d;
   color: rgb(255, 255, 255);
   caret-color: rgb(255, 255, 255);
   min-height: calc(5%);

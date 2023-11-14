@@ -50,7 +50,7 @@ export const registerUser = async (firstName, lastName, mail, password) => {
     })
 
     .catch((error) => {
-      this.errors.push("Unknown register error");
+      errors.push("Unknown register error");
       console.log("unknown catch error", error);
     });
   return { isLogin, errors };

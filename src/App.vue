@@ -10,7 +10,7 @@
       }"
     >
       <div class="pagination">
-        <VueSidebarMenu />
+        <VueSidebarMenu :isMenuOpen="!$isMobile()" />
         <!-- <div class="page-link" role="link" @click="navigate('/my')">
           Моя страница
         </div>

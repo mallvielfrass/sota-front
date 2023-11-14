@@ -1,8 +1,9 @@
 <template>
   <v-app>
     <Bar @setloginstate="setloginstate" />
-    <div class="padding-top"></div>
 
+    bar
+    <div v-if="$isMobile()">Is mobile</div>
     <div v-if="isLogin" class="working-container">
       <div class="pagination">
         <div class="page-link" role="link" @click="navigate('/my')">

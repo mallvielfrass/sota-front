@@ -1,13 +1,13 @@
 <template>
-  <v-app-bar color="#6A76AB" dark shrink-on-scroll prominent class="my-app-bar">
+  <div color="#6A76AB" class="my-app-bar">
     <v-container v-if="isLogin">
       <!-- <MenuList /> -->
     </v-container>
 
-    <div v-if="isLogin" class="ml-auto padding-right">
+    <div v-if="isLogin" class="ml-auto padding-righ button-padding">
       <v-btn variant="outlined" @click="logout"> Logout</v-btn>
     </div>
-    <div v-else class="ml-auto padding-right">
+    <div v-else class="ml-auto padding-right button-padding">
       <v-btn variant="outlined" @click="AuthFrame"> Login</v-btn>
     </div>
 
@@ -47,7 +47,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-app-bar>
+  </div>
 </template>
 <script>
 import { checkAuth, loginUser, registerUser } from "@/api/auth.js";
@@ -160,6 +160,23 @@ export default {
 };
 </script>
 <style>
+.button-padding {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.my-app-bar {
+  position: relative;
+  background-color: rgb(106, 118, 171);
+  color: rgb(255, 255, 255);
+  caret-color: rgb(255, 255, 255);
+  min-height: calc(5%);
+  max-height: fit-content;
+
+  width: calc(100% - 0px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .login-container {
   display: flex;
   justify-content: center;

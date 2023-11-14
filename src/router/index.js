@@ -1,6 +1,18 @@
 // Composables
 import { createRouter, createWebHistory } from "vue-router";
 
+//       //any other routes
+//       {
+//         path: "/:pathMatch(.*)*",
+//         name: "NotFound",
+//         component: () => import("@/views/NotFound.vue"),
+//       },
+//     ],
+//   },
+// ];
+import { useMobileDetection } from "vue3-mobile-detection";
+
+const { isMobile } = useMobileDetection();
 // const routes = [
 //   {
 //     path: "/",
@@ -32,15 +44,6 @@ import { createRouter, createWebHistory } from "vue-router";
 //         component: () => import("@/views/Bots.vue"),
 //       },
 
-//       //any other routes
-//       {
-//         path: "/:pathMatch(.*)*",
-//         name: "NotFound",
-//         component: () => import("@/views/NotFound.vue"),
-//       },
-//     ],
-//   },
-// ];
 const Home = { template: "<div>Home</div>" };
 const routes = [
   { path: "/bots", component: () => import("@/views/Bots.vue") },
@@ -51,6 +54,13 @@ const routes = [
   //users
   { path: "/users", component: () => import("@/views/Users.vue") },
   { path: "/users/:id", component: () => import("@/views/User.vue") },
+  {
+    path: "/agent",
+    component: () =>
+      this.$isMobile()
+        ? import("@/viewsMobile/Agent.vue")
+        : import("@/views/Agent.vue"),
+  },
   { path: "/", component: () => import("@/views/Account.vue") },
 
   { path: "/:pathMatch(.*)*", component: () => import("@/views/NotFound.vue") },

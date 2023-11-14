@@ -2,11 +2,17 @@
   <v-app>
     <Bar @setloginstate="setloginstate" />
 
-    bar
     <div v-if="$isMobile()">Is mobile</div>
-    <div v-if="isLogin" class="working-container">
+    <div
+      v-if="isLogin"
+      :class="{
+        'working-container': !$isMobile(),
+        'working-container-mobile': $isMobile(),
+      }"
+    >
       <div class="pagination">
-        <div class="page-link" role="link" @click="navigate('/my')">
+        <VueSidebarMenu />
+        <!-- <div class="page-link" role="link" @click="navigate('/my')">
           Моя страница
         </div>
         <div class="page-link" role="link" @click="navigate('/messages')">
@@ -19,7 +25,7 @@
 
         <div class="page-link" role="link" @click="navigate('/users')">
           Люди
-        </div>
+        </div> -->
       </div>
       <div class="working">
         <router-view />
@@ -30,13 +36,14 @@
 </template>
 
 <script>
+import VueSidebarMenu from "@/components/sideBar/Sidebar-menu.vue";
 import Bar from "./components/Bar.vue";
 export default {
   name: "App",
   data: () => ({
     isLogin: false,
   }),
-  components: { Bar },
+  components: { Bar, VueSidebarMenu },
   methods: {
     navigate(path) {
       this.$router.push(path);
@@ -56,7 +63,13 @@ export default {
 
 .working-container {
   display: grid;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: minmax(auto, max-content) 60% minmax(20%, auto);
+
+  height: 90%;
+}
+.working-container-mobile {
+  display: grid;
+  grid-template-columns: minmax(auto, max-content) minmax(60%, auto);
 
   height: 90%;
 }

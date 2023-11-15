@@ -2,7 +2,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Account from "@/views/Account.vue";
-import Agent from "@/views/Agent.vue";
 //       {
 //         path: "/bots",
 //         name: "Bots",
@@ -14,7 +13,6 @@ import Chats from "@/views/Chats.vue";
 import NotFound from "@/views/NotFound.vue";
 import User from "@/views/User.vue";
 import Users from "@/views/Users.vue";
-import MobileAgent from "@/viewsMobile/Agent.vue";
 //       //any other routes
 //       {
 //         path: "/:pathMatch(.*)*",
@@ -54,21 +52,18 @@ const { isMobile } = useMobileDetection();
 
 const Home = { template: "<div>Home</div>" };
 const routes = [
-  { path: "/bots", component: () => Bots },
-  { path: "/my", component: () => Account },
-  { path: "/messages", component: () => Chats },
+  { path: "/bots", Bots },
+  { path: "/my", Account },
+  { path: "/messages", Chats },
   //chats
-  { path: "/chats/:id", component: () => Chat },
+  { path: "/chats/:id", Chat },
   //users
-  { path: "/users", component: () => Users },
-  { path: "/users/:id", component: () => User },
-  {
-    path: "/agent",
-    component: () => (this.$isMobile() ? MobileAgent : Agent),
-  },
+  { path: "/users", Users },
+  { path: "/users/:id", User },
+
   { path: "/", Account },
 
-  { path: "/:pathMatch(.*)*", component: () => NotFound },
+  { path: "/:pathMatch(.*)*", NotFound },
 ];
 
 // 3. Create the router instance and pass the `routes` option

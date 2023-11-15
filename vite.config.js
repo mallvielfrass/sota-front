@@ -9,10 +9,32 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    target: "esnext",
+    minify: false,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ["vue3-mobile-detection", "is-mobile"],
+  },
   plugins: [
     vue({
       template: { transformAssetUrls },
     }),
+    // commonjs(),
+    // babel({
+    //   // указывайте здесь путь к вашему файлу конфигурации Babel
+    //   babelrc: "./.babelrc",
+    // }),
+    // requireTransform({}),
+
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
       autoImport: true,
@@ -20,6 +42,7 @@ export default defineConfig({
         configFile: "src/styles/settings.scss",
       },
     }),
+
     ViteFonts({
       google: {
         families: [

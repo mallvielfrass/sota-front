@@ -52,18 +52,18 @@ const { isMobile } = useMobileDetection();
 
 const Home = { template: "<div>Home</div>" };
 const routes = [
-  { path: "/bots", Bots },
-  { path: "/my", Account },
-  { path: "/messages", Chats },
+  { path: "/bots", component: Bots },
+  { path: "/my", component: Account },
+  { path: "/messages", component: Chats },
   //chats
-  { path: "/chats/:id", Chat },
+  { path: "/chats/:id", component: Chat },
   //users
-  { path: "/users", Users },
-  { path: "/users/:id", User },
+  { path: "/users", component: Users },
+  { path: "/users/:id", component: User },
 
-  { path: "/", Account },
+  { path: "/", component: Account },
 
-  { path: "/:pathMatch(.*)*", NotFound },
+  { path: "/:pathMatch(.*)*", component: NotFound },
 ];
 
 // 3. Create the router instance and pass the `routes` option

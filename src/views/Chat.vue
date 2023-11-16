@@ -18,7 +18,7 @@
       <v-textarea
         label="Новое сообщение..."
         auto-grow
-        rows="4"
+        rows="2"
         max-rows="10"
         v-model="msg"
         hide-details="auto"

@@ -192,6 +192,7 @@ export default {
 .bubbles-list {
   display: grid;
   grid-template-columns: auto;
+  width: 100%;
 }
 .messagesBox {
   display: grid;

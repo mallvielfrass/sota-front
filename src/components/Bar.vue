@@ -170,8 +170,7 @@ export default {
   background-color: #11101d;
   color: rgb(255, 255, 255);
   caret-color: rgb(255, 255, 255);
-  min-height: calc(5%);
-  max-height: fit-content;
+  height: 5vh;
 
   width: calc(100% - 0px);
   display: flex;
